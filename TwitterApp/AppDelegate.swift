@@ -52,8 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
       twitterClient.GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
         print("account: \(response)")
-        let user = response as! NSDictionary
-        print("name: ", user["name"])
+        let userDictionary = response as! NSDictionary
+        //print("user: ", user)
+
+        let user = User(dictionary: userDictionary)
+
+        print("name: ", user.name)
+        print("screen name: ", user.screenName)
+        print("profile image url: ", user.profileUrl)
+        print("description: ", user.tagline)
         }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
 
       })
@@ -62,9 +69,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     twitterClient.GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-        let tweets = response as! [NSDictionary]
+        let dictionaries = response as! [NSDictionary]
+
+        let tweets = Tweet.tweetsWithArray(dictionaries)
+
         for tweet in tweets {
-          print("\(tweet["text"]!)")
+          print("my tweet: \(tweet.text!)")
         }
       }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
 
