@@ -43,42 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-    print("url: ", url.description)
-    let requestToken = BDBOAuth1Credential(queryString: url.query)
-    let twitterClient = BDBOAuth1SessionManager(baseURL: NSURL(string: "https://api.twitter.com")!, consumerKey: "9KL5nmGGmjkgdo8Uoy6d7H6dM", consumerSecret: "kFfJ4qR01rUfxg1UNXTPH9hF1yn6Iej4Pv7rAicwvGwjavXTmZ")
 
-    twitterClient.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential!) -> Void in
-      print("I got the access token!")
-
-      twitterClient.GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-        print("account: \(response)")
-        let userDictionary = response as! NSDictionary
-        //print("user: ", user)
-
-        let user = User(dictionary: userDictionary)
-
-        print("name: ", user.name)
-        print("screen name: ", user.screenName)
-        print("profile image url: ", user.profileUrl)
-        print("description: ", user.tagline)
-        }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-
-      })
-    }) { (error: NSError!) -> Void in
-        print("error: \(error.localizedDescription)")
-    }
-
-    twitterClient.GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-        let dictionaries = response as! [NSDictionary]
-
-        let tweets = Tweet.tweetsWithArray(dictionaries)
-
-        for tweet in tweets {
-          print("my tweet: \(tweet.text!)")
-        }
-      }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
-
-    })
+    TwitterClient.sharedInstance.handleOpenUrl(url)
 
     return true
   }

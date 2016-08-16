@@ -10,10 +10,10 @@ import UIKit
 
 class User: NSObject {
 
-  var name: NSString?
-  var screenName: NSString?
+  var name: String?
+  var screenName: String?
   var profileUrl: NSURL?
-  var tagline: NSString?
+  var tagline: String?
 
   init(dictionary: NSDictionary) {
     name = dictionary["name"] as! String
