@@ -59,6 +59,12 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     hamburgerViewController.contentViewController = viewControllers[indexPath.row]
+
+    if indexPath.row == 1 { // Profile page
+      let nc = viewControllers[indexPath.row] as! UINavigationController
+      let vc = nc.topViewController as! ProfileViewController
+      vc.userScreenName = User.currentUser?.screenName
+    }
   }
     
 

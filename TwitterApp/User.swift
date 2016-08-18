@@ -15,20 +15,34 @@ class User: NSObject {
   var profileUrl: NSURL?
   var tagline: String?
 
+  var countTweets: Int?
+  var countFollowers: Int?
+  var CountFollowing: Int?
+
   var dictionary: NSDictionary?
 
   init(dictionary: NSDictionary) {
     self.dictionary = dictionary
 
-    name = dictionary["name"] as! String
-    screenName = dictionary["screen_name"] as! String
+    name = dictionary["name"] as? String
+    screenName = dictionary["screen_name"] as? String
 
     let profileUrlString = dictionary["profile_image_url_https"] as? String
     if let profileUrlString = profileUrlString {
       profileUrl = NSURL(string: profileUrlString)
     }
 
-    tagline = dictionary["description"] as! String
+    tagline = dictionary["description"] as? String
+
+    if let countTweetsInDict = dictionary["listed_count"] as? Int {
+      countTweets = countTweetsInDict
+    }
+    if let countFollowersInDict = dictionary["followers_count"] as? Int {
+      countFollowers = countFollowersInDict
+    }
+    if let countFollowingInDict = dictionary["favourites_count"] as? Int {
+      CountFollowing = countFollowingInDict
+    }
   }
 
   static let userDidLogoutNotification = "UserDidLogout"

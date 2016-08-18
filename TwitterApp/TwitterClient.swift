@@ -28,6 +28,9 @@ class TwitterClient: BDBOAuth1SessionManager {
       print("screen name: ", user.screenName)
       print("profile image url: ", user.profileUrl)
       print("description: ", user.tagline)
+      print("tweets count: ", user.countTweets)
+      print("followers count: ", user.countFollowers)
+      print("following count: ", user.CountFollowing)
       }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
         failure(error)
     })
@@ -80,6 +83,30 @@ class TwitterClient: BDBOAuth1SessionManager {
     deauthorize()
 
     NSNotificationCenter.defaultCenter().postNotificationName(User.userDidLogoutNotification, object: nil)
+  }
+
+  /* Get User By Screen Name */
+  func getUserByScreenName(screenName: String, success: (User) -> (), failure: (NSError) -> ()) {
+    print("In getUserByScreenName")
+    GET("1.1/users/show.json", parameters: ["screen_name": screenName], progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+      print("account: \(response)")
+      let userDictionary = response as! NSDictionary
+      let user = User(dictionary: userDictionary)
+
+      success(user)
+
+      print("\nStart result of getUserByScreenName")
+      print("name: ", user.name)
+      print("screen name: ", user.screenName)
+      print("profile image url: ", user.profileUrl)
+      print("description: ", user.tagline)
+      print("tweets count: ", user.countTweets)
+      print("followers count: ", user.countFollowers)
+      print("following count: ", user.CountFollowing)
+      print("End result of getUserByScreenName\n")
+      }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+        failure(error)
+    })
   }
 
 }

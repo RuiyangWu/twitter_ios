@@ -25,11 +25,12 @@ class TweetCell: UITableViewCell {
       tweetTextLabel.text = tweet.text
       timestampLabel.text = "2h" // TODO
       if let profileImageUrl = tweet.profileImageUrl {
-        print("url: ", profileImageUrl)
         profileImageView.setImageWithURL(profileImageUrl)
       }
     }
   }
+
+  
 
     override func awakeFromNib() {
         super.awakeFromNib()

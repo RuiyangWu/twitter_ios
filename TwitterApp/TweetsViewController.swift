@@ -48,12 +48,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
       return tweets?.count ?? 0
     }
 
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
-    cell.tweet = tweets[indexPath.row]
-    return cell
-  }
-    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+      let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
+      cell.tweet = tweets[indexPath.row]
+      return cell
+    }
+
     @IBAction func onLogoutButton(sender: AnyObject) {
       TwitterClient.sharedInstance.logout()
     }
