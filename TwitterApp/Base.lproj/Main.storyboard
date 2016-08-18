@@ -39,7 +39,7 @@
             </objects>
             <point key="canvasLocation" x="-47" y="-437"/>
         </scene>
-        <!--Tweet Detail View Controller-->
+        <!--Tweet-->
         <scene sceneID="2jw-Ds-Cw0">
             <objects>
                 <viewController id="edm-DI-yTZ" customClass="TweetDetailViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,9 +50,72 @@
                     <view key="view" contentMode="scaleToFill" id="jfI-fH-qXU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uwM-Yt-8AZ">
+                                <rect key="frame" x="11" y="77" width="65" height="65"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TechCrunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plk-F0-OFS">
+                                <rect key="frame" x="84" y="77" width="93" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@TechCrunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWx-FB-HdH">
+                                <rect key="frame" x="84" y="99" width="109" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="8/17/16, 8:55 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2G8-KL-mjQ">
+                                <rect key="frame" x="11" y="150" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Several key Rothenberg Ventures em" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xh-Xd-hw1">
+                                <rect key="frame" x="11" y="179" width="282" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSv-fn-WtO">
+                                <rect key="frame" x="120" y="233" width="65" height="30"/>
+                                <state key="normal" title="Favorite"/>
+                                <connections>
+                                    <action selector="onFavorite:" destination="edm-DI-yTZ" eventType="touchUpInside" id="Imw-fe-fSn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NvD-mJ-8MS">
+                                <rect key="frame" x="228" y="233" width="65" height="30"/>
+                                <state key="normal" title="Reply"/>
+                                <connections>
+                                    <action selector="onReply:" destination="edm-DI-yTZ" eventType="touchUpInside" id="hg1-Zt-Hlg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa9-C2-c6D">
+                                <rect key="frame" x="11" y="233" width="65" height="30"/>
+                                <state key="normal" title="Retweet"/>
+                                <connections>
+                                    <action selector="onRetweet:" destination="edm-DI-yTZ" eventType="touchUpInside" id="psN-EQ-r5a"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="QPC-Z8-BYj"/>
+                    <navigationItem key="navigationItem" title="Tweet" id="QPC-Z8-BYj">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="eKl-jp-mh6">
+                            <connections>
+                                <action selector="onBack:" destination="edm-DI-yTZ" id="ggm-9o-7yd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="profileImageView" destination="uwM-Yt-8AZ" id="eEn-uE-WgV"/>
+                        <outlet property="screenNameLabel" destination="zWx-FB-HdH" id="5gd-0o-C0f"/>
+                        <outlet property="timestampLabel" destination="2G8-KL-mjQ" id="WVy-hr-8Ne"/>
+                        <outlet property="tweetTextLabel" destination="1Xh-Xd-hw1" id="26h-Hk-am5"/>
+                        <outlet property="userNameLabel" destination="Plk-F0-OFS" id="8e3-XP-wJJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jia-Bc-5u2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -356,7 +419,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRj-DW-g4Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="491" y="1133"/>
+            <point key="canvasLocation" x="411" y="267"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lBY-Y6-nzj">
