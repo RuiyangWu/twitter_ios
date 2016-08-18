@@ -29,7 +29,6 @@ class TweetCell: UITableViewCell {
       }
     }
   }
-
   
 
     override func awakeFromNib() {

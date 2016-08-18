@@ -14,6 +14,8 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     var tweets: [Tweet]!
 
+    var dict = [UIGestureRecognizer : Tweet]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -51,7 +53,24 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
       let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
       cell.tweet = tweets[indexPath.row]
+
+      cell.profileImageView.userInteractionEnabled = true
+      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetsViewController.onCustomTap(_:)))
+      cell.profileImageView.addGestureRecognizer(tapGestureRecognizer)
+      dict[tapGestureRecognizer] = tweets[indexPath.row]
+
       return cell
+    }
+
+    func onCustomTap(tapGestureRecognizer: UITapGestureRecognizer) {
+      print("alive!")
+      print("Tweet: ", dict[tapGestureRecognizer]?.userScreenName!)
+      //print(imageView)
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let nc = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
+      let vc = nc.topViewController as! ProfileViewController
+      vc.userScreenName = dict[tapGestureRecognizer]?.userScreenName! // User.currentUser?.screenName
+      self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func onLogoutButton(sender: AnyObject) {

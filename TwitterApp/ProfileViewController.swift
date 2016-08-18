@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController {
 
     var user: User? {
       didSet {
+        view.layoutIfNeeded()
         userNameLabel.text = user?.name
         screenNameLabel.text = user?.screenName
         descriptionLabel.text = user?.tagline

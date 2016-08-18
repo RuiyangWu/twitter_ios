@@ -344,7 +344,7 @@
         <!--Profile-->
         <scene sceneID="5Pa-3r-FVB">
             <objects>
-                <viewController id="N0P-LS-FLJ" customClass="ProfileViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="N0P-LS-FLJ" customClass="ProfileViewController" customModule="TwitterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="x10-zO-vCY"/>
                         <viewControllerLayoutGuide type="bottom" id="KBX-49-tUF"/>
