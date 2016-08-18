@@ -20,16 +20,23 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
 
-        // Get tweets
-        TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
-          self.tweets = tweets
-          //for tweet in tweets {
-          //  print("my tweet: ", tweet.text)
-          //}
-          self.tableView.reloadData()
-        }, failure: { (error: NSError) in
-            print(error.localizedDescription)
-        })
+        // Pull to refresh
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(getTweets(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+
+        // Get initial tweets
+        getTweets(refreshControl)
+    }
+
+    func getTweets(refreshControl: UIRefreshControl) {
+      TwitterClient.sharedInstance.homeTimeline({ (tweets: [Tweet]) -> () in
+        self.tweets = tweets
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+      }, failure: { (error: NSError) in
+          print(error.localizedDescription)
+      })
     }
 
     override func didReceiveMemoryWarning() {
