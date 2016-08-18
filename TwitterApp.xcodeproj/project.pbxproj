@@ -179,13 +179,13 @@
 		486876F11D627F420000A5FF /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				486876EE1D61A36D0000A5FF /* LoginViewController.swift */,
-				486876FD1D629C2B0000A5FF /* TweetsViewController.swift */,
+				486877461D6639160000A5FF /* ComposeTweetViewController.swift */,
 				486877021D6392C30000A5FF /* HamburgerViewController.swift */,
+				486876EE1D61A36D0000A5FF /* LoginViewController.swift */,
 				486877041D640EAA0000A5FF /* MenuViewController.swift */,
 				486877421D6554F30000A5FF /* ProfileViewController.swift */,
+				486876FD1D629C2B0000A5FF /* TweetsViewController.swift */,
 				486877441D6627490000A5FF /* TweetDetailViewController.swift */,
-				486877461D6639160000A5FF /* ComposeTweetViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

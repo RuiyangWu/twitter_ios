@@ -8,6 +8,7 @@
 
 import UIKit
 import BDBOAuth1Manager
+import AFNetworking
 
 class TwitterClient: BDBOAuth1SessionManager {
 
@@ -16,26 +17,20 @@ class TwitterClient: BDBOAuth1SessionManager {
   var loginSuccess: (() -> ())?
   var loginFailure: ((NSError) -> ())?
 
+  /* Load Current User Account */
   func currentAccount(success: (User) -> (), failure: (NSError) -> ()) {
     GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-      print("account: \(response)")
       let userDictionary = response as! NSDictionary
       let user = User(dictionary: userDictionary)
 
       success(user)
 
-      print("name: ", user.name)
-      print("screen name: ", user.screenName)
-      print("profile image url: ", user.profileUrl)
-      print("description: ", user.tagline)
-      print("tweets count: ", user.countTweets)
-      print("followers count: ", user.countFollowers)
-      print("following count: ", user.CountFollowing)
       }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
         failure(error)
     })
   }
 
+  /* Get Home Timeline */
   func homeTimeline(success: ([Tweet]) -> (), failure: (NSError) -> ()) {
     GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
       let dictionaries = response as! [NSDictionary]
@@ -47,6 +42,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
 
+  /* Login First Step -- Get request token from Twitter */
   func login(success: () -> (), failure: (NSError) -> ()) {
     loginSuccess = success
     loginFailure = failure
@@ -63,6 +59,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
   }
 
+  /* Login Complete Step -- Get Access Token */
   func handleOpenUrl(url: NSURL) {
     let requestToken = BDBOAuth1Credential(queryString: url.query)
     fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential!) -> Void in
@@ -78,6 +75,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
   }
 
+  /* Logout Current User */
   func logout() {
     User.currentUser = nil
     deauthorize()
@@ -89,24 +87,50 @@ class TwitterClient: BDBOAuth1SessionManager {
   func getUserByScreenName(screenName: String, success: (User) -> (), failure: (NSError) -> ()) {
     print("In getUserByScreenName")
     GET("1.1/users/show.json", parameters: ["screen_name": screenName], progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
-      print("account: \(response)")
       let userDictionary = response as! NSDictionary
       let user = User(dictionary: userDictionary)
 
       success(user)
 
-      print("\nStart result of getUserByScreenName")
-      print("name: ", user.name)
-      print("screen name: ", user.screenName)
-      print("profile image url: ", user.profileUrl)
-      print("description: ", user.tagline)
-      print("tweets count: ", user.countTweets)
-      print("followers count: ", user.countFollowers)
-      print("following count: ", user.CountFollowing)
-      print("End result of getUserByScreenName\n")
       }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
         failure(error)
     })
+  }
+
+  /* Post - Retweet */
+  func retweetById(id: String, success: () -> (), failure: (NSError) -> ()) {
+    print("In retweetById")
+    POST("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask?, response: AnyObject?) -> Void in
+      print("Retweet good! :)")
+      success()
+    }) { (task: NSURLSessionDataTask?, error: NSError) in
+      print("Retweet bad :(")
+      failure(error)
+    }
+  }
+
+  /* Post - Favorite */
+  func favoriteById(id: String, success: () -> (), failure: (NSError) -> ()) {
+    print("In favoriteById")
+    POST("1.1/favorites/create.json", parameters: ["id": id], progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+      print("Favorite good! :)")
+      success()
+    }) { (task: NSURLSessionDataTask?, error: NSError) in
+      print("Favorite bad :(")
+      failure(error)
+    }
+  }
+
+  /* Post - createTweet */
+  func createTweet(text: String, success: () -> (), failure: (NSError) -> ()) {
+    print("In favoriteById")
+    POST("1.1/statuses/update.json", parameters: ["status": text], progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+      print("Create Tweet good! :)")
+      success()
+    }) { (task: NSURLSessionDataTask?, error: NSError) in
+      print("Create Tweet bad :(")
+      failure(error)
+    }
   }
 
 }

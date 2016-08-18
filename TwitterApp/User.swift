@@ -34,13 +34,13 @@ class User: NSObject {
 
     tagline = dictionary["description"] as? String
 
-    if let countTweetsInDict = dictionary["listed_count"] as? Int {
+    if let countTweetsInDict = dictionary["statuses_count"] as? Int {
       countTweets = countTweetsInDict
     }
     if let countFollowersInDict = dictionary["followers_count"] as? Int {
       countFollowers = countFollowersInDict
     }
-    if let countFollowingInDict = dictionary["favourites_count"] as? Int {
+    if let countFollowingInDict = dictionary["friends_count"] as? Int {
       CountFollowing = countFollowingInDict
     }
   }

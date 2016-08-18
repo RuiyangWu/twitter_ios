@@ -37,7 +37,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.tableView.reloadData()
         refreshControl.endRefreshing()
       }, failure: { (error: NSError) in
-          print(error.localizedDescription)
+          print("getTweets error: ", error.localizedDescription)
       })
     }
 

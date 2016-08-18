@@ -48,9 +48,19 @@ class TweetDetailViewController: UIViewController {
     }
 
     @IBAction func onRetweet(sender: AnyObject) {
+      TwitterClient.sharedInstance.retweetById(String(tweet.id), success: { () in
+          // Do nothing
+        }, failure: {(error: NSError) in
+          print("Error when Retweet-ing: ", error.localizedDescription)
+      })
     }
 
     @IBAction func onFavorite(sender: AnyObject) {
+      TwitterClient.sharedInstance.favoriteById(String(tweet.id), success: { () in
+        // Do nothing
+        }, failure: {(error: NSError) in
+          print("Error when Favorit-ing: ", error.localizedDescription)
+      })
     }
 
     @IBAction func onReply(sender: AnyObject) {

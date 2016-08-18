@@ -10,12 +10,12 @@ import UIKit
 
 class ComposeTweetViewController: UIViewController {
 
-  @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
 
-  @IBOutlet weak var userNameLabel: UILabel!
-  @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var screenNameLabel: UILabel!
 
-  @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -35,15 +35,23 @@ class ComposeTweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-  @IBAction func onCancel(sender: AnyObject) {
-    dismissViewControllerAnimated(true, completion: nil)
-  }
+    @IBAction func onCancel(sender: AnyObject) {
+      dismissViewControllerAnimated(true, completion: nil)
+    }
 
-  @IBAction func onTweet(sender: AnyObject) {
-    // TODO: create tweet
+    @IBAction func onTweet(sender: AnyObject) {
+      print("About to tweet: ", textField.text)
+      /*
+      TwitterClient.sharedInstance.createTweet(textField.text!, success: { () in
+        // Do nothing
+        }, failure: {(error: NSError) in
+          print("Error When Creating Tweet: ", error.localizedDescription)
+      })
+      */
 
-    dismissViewControllerAnimated(true, completion: nil)
-  }
+      dismissViewControllerAnimated(true, completion: nil)
+    }
+
     /*
     // MARK: - Navigation
 
