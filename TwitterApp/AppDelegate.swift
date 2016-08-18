@@ -27,15 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       //window?.rootViewController = vc
 
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let hamburgerNavigationController = storyboard.instantiateViewControllerWithIdentifier("HamburgerNavigationController") as! UINavigationController
-      window?.rootViewController = hamburgerNavigationController
+      let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
+      window?.rootViewController = hamburgerViewController
 
       //let hamburgerViewController = storyboard.instantiateViewControllerWithIdentifier("HamburgerViewController") as! HamburgerViewController
-      let hamburgerViewController = hamburgerNavigationController.topViewController as! HamburgerViewController
+//      let hamburgerViewController = hamburgerNavigationController.topViewController as! HamburgerViewController
       let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
 
       menuViewController.hamburgerViewController = hamburgerViewController
-      
+
       hamburgerViewController.menuViewController = menuViewController
     }
     else {
