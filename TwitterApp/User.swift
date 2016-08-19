@@ -14,6 +14,7 @@ class User: NSObject {
   var screenName: String?
   var profileUrl: NSURL?
   var tagline: String?
+  var location: String?
 
   var countTweets: Int?
   var countFollowers: Int?
@@ -33,6 +34,10 @@ class User: NSObject {
     }
 
     tagline = dictionary["description"] as? String
+
+    if let locationString = dictionary["location"] as? String {
+      location = locationString
+    }
 
     if let countTweetsInDict = dictionary["statuses_count"] as? Int {
       countTweets = countTweetsInDict

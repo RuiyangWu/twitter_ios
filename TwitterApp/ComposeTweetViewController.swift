@@ -15,7 +15,7 @@ class ComposeTweetViewController: UIViewController {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
 
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textField: UITextView!
 
     override func viewDidLoad() {
       super.viewDidLoad()
@@ -28,6 +28,9 @@ class ComposeTweetViewController: UIViewController {
       if let profileImageUrl = user.profileUrl {
         profileImageView.setImageWithURL(profileImageUrl)
       }
+
+      textField.layer.borderWidth = 1.0;
+      textField.layer.borderColor = UIColor.lightGrayColor().CGColor
     }
 
     override func didReceiveMemoryWarning() {

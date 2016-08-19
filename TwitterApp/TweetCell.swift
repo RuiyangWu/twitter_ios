@@ -23,9 +23,35 @@ class TweetCell: UITableViewCell {
         userScreenNameLabel.text = "@" + tweet.userScreenName!
       }
       tweetTextLabel.text = tweet.text
-      timestampLabel.text = "2h" // TODO
+
       if let profileImageUrl = tweet.profileImageUrl {
         profileImageView.setImageWithURL(profileImageUrl)
+      }
+
+      //var timestamp: NSDate?
+      let currentDatetime = NSDate()
+      print("date: ", currentDatetime)
+      let calendar = NSCalendar.currentCalendar()
+      let components = calendar.components([.Hour , .Minute], fromDate: currentDatetime)
+
+      let currentHour =  components.hour
+      let currentMinute = components.minute
+
+      //timestampLabel.text = "2h" // TODO
+      if let tweetTimestamp = tweet.timestamp {
+        let components = calendar.components([.Hour , .Minute], fromDate: tweetTimestamp)
+        let tweetHour = components.hour
+        let tweetMinute = components.minute
+
+        let hourDiff = currentHour - tweetHour
+        let minuteDiff = currentMinute - tweetMinute
+
+        if hourDiff > 0 {
+          timestampLabel.text = "\(hourDiff)h"
+        }
+        else {
+          timestampLabel.text = "\(minuteDiff)h"
+        }
       }
     }
   }

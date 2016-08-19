@@ -22,6 +22,16 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
 
+        // Navigation Bar Customization
+        if let navigationBar = navigationController?.navigationBar {
+          navigationBar.backgroundColor = UIColor(red: CGFloat(85)/255.0, green: CGFloat(172)/255.0, blue: CGFloat(238)/255.0, alpha: 0.8)
+
+          navigationBar.titleTextAttributes = [
+            NSFontAttributeName : UIFont.boldSystemFontOfSize(22),
+            NSForegroundColorAttributeName : UIColor(red: CGFloat(85)/255.0, green: CGFloat(172)/255.0, blue: CGFloat(238)/255.0, alpha: 0.8)
+          ]
+        }
+
         // Pull to refresh
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(getTweets(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -63,9 +73,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func onCustomTap(tapGestureRecognizer: UITapGestureRecognizer) {
-      print("alive!")
-      print("Tweet: ", dict[tapGestureRecognizer]?.userScreenName!)
-      //print(imageView)
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
       let nc = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
       let vc = nc.topViewController as! ProfileViewController

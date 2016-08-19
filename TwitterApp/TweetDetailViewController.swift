@@ -25,9 +25,19 @@ class TweetDetailViewController: UIViewController {
           screenNameLabel.text = "@" + tweet.userScreenName!
         }
         tweetTextLabel.text = tweet.text
-        timestampLabel.text = "8/17/16, 8:55 PM" // TODO
         if let profileImageUrl = tweet.profileImageUrl {
           profileImageView.setImageWithURL(profileImageUrl)
+        }
+
+        if let timestamp = tweet.timestamp {
+          let formatter = NSDateFormatter()
+          //formatter.dateFormat = "EEE MM d HH:mm:ss Z y"
+          formatter.dateFormat = "MM/dd/yy, HH:mm:ss"
+          timestampLabel.text = formatter.stringFromDate(timestamp)
+          // "8/17/16, 8:55 PM"
+        }
+        else {
+          timestampLabel.text = "N/A"
         }
       }
     }

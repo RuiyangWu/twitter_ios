@@ -21,7 +21,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var countFollowingLabel: UILabel!
     @IBOutlet weak var countFollowersLabel: UILabel!
 
-    //var userScreenName: String? {
     var userScreenName: String? {
       didSet {
         TwitterClient.sharedInstance.getUserByScreenName(userScreenName!, success: { (resultUser: User) in
@@ -35,9 +34,10 @@ class ProfileViewController: UIViewController {
     var user: User? {
       didSet {
         view.layoutIfNeeded()
-        userNameLabel.text = user?.name
-        screenNameLabel.text = user?.screenName
-        descriptionLabel.text = user?.tagline
+        userNameLabel.text = user!.name
+        screenNameLabel.text = user!.screenName
+        descriptionLabel.text = user!.tagline
+        locationLabel.text = user!.location
 
         countTweetsLabel.text = String(user!.countTweets!)
         countFollowersLabel.text = String(user!.countFollowers!)
@@ -50,9 +50,19 @@ class ProfileViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+      // Do any additional setup after loading the view.
+
+      // Navigation Bar Customization
+      if let navigationBar = navigationController?.navigationBar {
+        navigationBar.backgroundColor = UIColor(red: CGFloat(85)/255.0, green: CGFloat(172)/255.0, blue: CGFloat(238)/255.0, alpha: 0.8)
+
+        navigationBar.titleTextAttributes = [
+          NSFontAttributeName : UIFont.boldSystemFontOfSize(22),
+          NSForegroundColorAttributeName : UIColor(red: CGFloat(85)/255.0, green: CGFloat(172)/255.0, blue: CGFloat(238)/255.0, alpha: 0.8)
+        ]
+      }
     }
 
     override func didReceiveMemoryWarning() {

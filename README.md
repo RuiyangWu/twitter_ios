@@ -2,7 +2,7 @@
 
 **Name of your app** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com).
 
-Time spent: **X** hours spent in total
+Time spent: 25 hours spent in total
 
 ## User Stories
 
@@ -13,11 +13,11 @@ The following **required** functionality is completed:
 - [X] The current signed in user will be persisted across restarts.
 - [X] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.  In other words, design the custom cell with the proper Auto Layout settings.  You will also need to augment the model classes.
 - [X] User can pull to refresh.
-- [ ] User can compose a new tweet by tapping on a compose button.
+- [X] User can compose a new tweet by tapping on a compose button.
 - [X] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
 - [X] Hamburger menu
    - [X] Dragging anywhere in the view should reveal the menu.
-   - [ ] The menu should include links to your profile, the home timeline, and the mentions view.
+   - [X] The menu should include links to your profile, the home timeline, and the mentions view.
 - [X] Profile page
    - [X] Contains the user header view (implemented as a custom view)
    - [X] Contains a section with the users basic stats: # tweets, # following, # followers
@@ -47,7 +47,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/dqRZhFq.gif' title='Video Walkthrough' width='' alt='Video Walk through' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -57,7 +57,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [Ruiyang Wu]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
